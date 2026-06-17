@@ -530,11 +530,37 @@ function closeRSVP(){
   document.getElementById('modal').classList.remove('open');
   document.getElementById('fw').style.zIndex = '';  // drop fireworks back behind the invite
 }
-document.getElementById('rsvp-form').addEventListener('submit', function(e){
+// ---- Supabase (RSVPs are stored here; this key is safe to expose: it can only INSERT) ----
+const SUPABASE_URL = 'https://xcdqkuzpbvbtpyhroibv.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_9fZfKKpWlQuLPunmj96RMg_k2iwL6UZ';
+
+document.getElementById('rsvp-form').addEventListener('submit', async function(e){
   e.preventDefault();
   const name = document.getElementById('rsvp-name').value.trim();
   const monument = document.getElementById('rsvp-monument').value;
   if(!name || !monument) return;
+
+  const submitBtn = this.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/rsvps', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ name: name, monument: monument })
+    });
+    if(!res.ok) throw new Error('RSVP save failed: ' + res.status);
+  } catch(err) {
+    // Don't block the guest's celebration if the network hiccups — just log it.
+    console.error(err);
+  }
+
   document.getElementById('disp-name').textContent = name;
   document.getElementById('disp-monument').textContent = monument;
   document.getElementById('rsvp-form').style.display = 'none';

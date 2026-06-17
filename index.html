@@ -102,16 +102,18 @@
   .tape{position:absolute; box-shadow:0 2px 4px rgba(0,0,0,.15); z-index:5;}
   .plan .tape{top:-12px; left:50%; width:130px; height:28px; transform:translateX(-50%) rotate(-2deg); background:rgba(232,178,58,.55);}
   .plan-sheet{
-    position:relative; transform:rotate(0.7deg); padding:26px 26px 24px 46px;
+    position:relative; transform:rotate(0.7deg); padding:30px 26px 30px 46px;
     background-color:#FCF7E8;
-    background-image:repeating-linear-gradient(transparent 0 28px, rgba(90,140,200,.4) 28px 29px), linear-gradient(90deg, transparent 30px, rgba(216,54,47,.4) 30px 32px, transparent 32px);
+    background-image:repeating-linear-gradient(transparent 0 29px, rgba(90,140,200,.45) 29px 30px), linear-gradient(90deg, transparent 30px, rgba(216,54,47,.4) 30px 32px, transparent 32px);
     clip-path:polygon(0% 3%,7% 0%,16% 4%,27% 1%,38% 5%,50% 1%,61% 5%,72% 1%,83% 5%,93% 1%,100% 4%,99% 96%,90% 100%,79% 96%,67% 100%,55% 96%,44% 100%,32% 96%,21% 100%,10% 96%,2% 99%,0% 93%);
   }
-  .plan-title{font-family:'Permanent Marker',cursive; font-size:24px; color:var(--red); transform:rotate(-1.5deg); margin-bottom:12px;}
-  .plan-row{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+  /* every line of writing sits on the 30px ruled grid */
+  .plan-sheet > *{ line-height:30px; }
+  .plan-title{font-family:'Permanent Marker',cursive; font-size:24px; color:var(--red); margin:0;}
+  .plan-row{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; min-height:30px; margin:0;}
   .plan-head{font-family:'Shrikhand',serif; font-size:24px;}
   .plan-time{font-family:'Special Elite',monospace; font-size:15px; color:var(--ink);}
-  .plan-note{font-family:'Caveat',cursive; font-weight:600; font-size:23px; margin-bottom:18px;}
+  .plan-note{font-family:'Caveat',cursive; font-weight:600; font-size:23px; margin:0;}
 
   /* ---- location torn scrap ---- */
   .loc{position:relative; margin:30px auto 0; max-width:430px; filter:drop-shadow(0 8px 12px rgba(0,0,0,.28));}
@@ -228,16 +230,16 @@
               <span class="plan-head" style="color:var(--navy);">Pool party</span>
               <span class="plan-time">2:00 – 6:00 pm 🏊</span>
             </div>
-            <div class="plan-note" style="color:#9a3b2e; transform:rotate(-.6deg);">…grill fires up around 5:30 🔥</div>
+            <div class="plan-note" style="color:#9a3b2e; margin-bottom:30px;">…grill fires up around 5:30 🔥</div>
 
             <div class="plan-row">
               <span class="plan-head" style="color:var(--red);">Then upstairs</span>
               <span class="plan-time">show at 9:20 ✦</span>
             </div>
-            <div class="plan-note" style="color:var(--navy-deep); transform:rotate(.5deg); margin-bottom:6px;">…we'll all drift up to the apartment at some point during the evening — but we'll definitely be upstairs before the 9:20 show!</div>
-            <div class="plan-note" style="color:#9a3b2e; font-weight:700; transform:rotate(-.5deg); margin-bottom:10px;">✦ we've got a <em style="font-style:normal; color:#D8362F;">perfect view</em> of the Nashville fireworks! ✦</div>
-            <a href="https://www.visitmusiccity.com/july4th" target="_blank" rel="noopener noreferrer" style="display:inline-block; font-family:'Special Elite',monospace; font-size:14px; color:#2B5BA8; text-decoration:underline; text-decoration-color:#D8362F; text-underline-offset:3px; transform:rotate(-.5deg);">★ it's Nashville's <strong>Let Freedom Sing!</strong> — see the lineup &amp; details ↗</a>
-            <div style="font-family:'Special Elite',monospace; font-size:11px; line-height:1.5; color:#6b5f48; margin-top:9px; max-width:430px;">P.S. this year's a big one — America's 250th: a record 1,000-drone display plus Nashville's largest-ever fireworks, all free downtown. Our 9:20 rooftop view will be perfect for it. ✦</div>
+            <div class="plan-note" style="color:var(--navy-deep);">…we'll all drift up to the apartment at some point during the evening — but we'll definitely be upstairs before the 9:20 show!</div>
+            <div class="plan-note" style="color:#9a3b2e; font-weight:700;">✦ we've got a <em style="font-style:normal; color:#D8362F;">perfect view</em> of the Nashville fireworks! ✦</div>
+            <a href="https://www.visitmusiccity.com/july4th" target="_blank" rel="noopener noreferrer" style="display:block; font-family:'Special Elite',monospace; font-size:14px; color:#2B5BA8; text-decoration:underline; text-decoration-color:#D8362F; text-underline-offset:3px;">★ it's Nashville's <strong>Let Freedom Sing!</strong> — see the lineup &amp; details ↗</a>
+            <div style="font-family:'Special Elite',monospace; font-size:11px; line-height:15px; color:#6b5f48; margin:0; max-width:430px;">P.S. this year's a big one — America's 250th: a record 1,000-drone display plus Nashville's largest-ever fireworks, all free downtown. Our 9:20 rooftop view will be perfect for it. ✦</div>
           </div>
         </div>
 

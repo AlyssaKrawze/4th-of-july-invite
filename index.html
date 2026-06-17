@@ -491,12 +491,12 @@ const FW = (function(){
   });
 
   function finale(){
-    // a screen FULL of fireworks: dense bursts across the entire sky + a heavy rocket wave
-    for(let i=0;i<48;i++){
-      setTimeout(()=>burst(rand(W*0.04, W*0.96), rand(H*0.05, H*0.85)), i*35);
+    // ~1.2s screen-full of fireworks: dense bursts across the sky + a quick rocket wave
+    for(let i=0;i<34;i++){
+      setTimeout(()=>burst(rand(W*0.04, W*0.96), rand(H*0.05, H*0.85)), i*34);
     }
-    for(let i=0;i<22;i++){
-      setTimeout(()=>launch(rand(W*0.06, W*0.94)), i*70);
+    for(let i=0;i<13;i++){
+      setTimeout(()=>launch(rand(W*0.06, W*0.94)), i*85);
     }
   }
   function celebrate(){
@@ -535,7 +535,7 @@ function openRSVP(){
   FW.finale();                 // screen-full of fireworks first...
   setTimeout(function(){       // ...then bring up the modal once the show has played
     document.getElementById('modal').classList.add('open');
-  }, 2400);
+  }, 1200);
 }
 function closeRSVP(){
   document.getElementById('modal').classList.remove('open');

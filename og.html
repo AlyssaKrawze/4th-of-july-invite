@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Caveat:wght@600;700&family=Permanent+Marker&family=Special+Elite&family=Anton&family=Abril+Fatface&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1200px;height:630px;overflow:hidden;}
+  body{
+    position:relative;
+    background:radial-gradient(120% 90% at 50% 0%, #16306b 0%, #0d1d44 45%, #081229 100%);
+    font-family:'Anton',sans-serif;
+  }
+  .star{position:absolute;border-radius:50%;background:#fff;}
+  /* static firework bursts */
+  .fw{position:absolute;}
+  .fw line{stroke-linecap:round;}
+
+  .wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;}
+
+  .bunting{display:flex;gap:0;margin-bottom:26px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.4));}
+  .flag{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-top:34px solid;}
+
+  .pre{font-family:'Permanent Marker',cursive;font-size:34px;color:#cdddff;transform:rotate(-2deg);margin-bottom:10px;text-shadow:0 2px 6px rgba(0,0,0,.5);}
+
+  .ransom{display:flex;align-items:flex-end;gap:10px;}
+  .ransom span{display:inline-block;line-height:.8;box-shadow:4px 5px 0 rgba(0,0,0,.3);}
+  .r1{font-family:'Anton',sans-serif;font-size:120px;color:#fff;background:#D8362F;padding:10px 22px 16px;transform:rotate(-5deg);}
+  .r2{font-family:'Abril Fatface',serif;font-size:120px;color:#2B5BA8;background:#F6EAD0;padding:6px 18px 12px;transform:rotate(4deg);border:2px solid #cdbf9d;}
+  .r3{font-family:'Archivo Black',sans-serif;font-size:104px;color:#F6EAD0;background:#2B5BA8;padding:14px 20px 16px;transform:rotate(-3deg);}
+  .r4{font-family:'Shrikhand',serif;font-size:112px;color:#fff;background:#E8B23A;padding:10px 18px 14px;transform:rotate(5deg);}
+  .r5{font-family:'Anton',sans-serif;font-size:120px;color:#D8362F;background:#fff;padding:10px 20px 16px;transform:rotate(-4deg);border:2px solid #e3d7b8;}
+  .rbang{font-family:'Permanent Marker',cursive;font-size:104px;color:#E8B23A;transform:rotate(8deg);padding-left:6px;text-shadow:0 3px 8px rgba(0,0,0,.5);}
+
+  .sub{font-family:'Caveat',cursive;font-weight:700;font-size:46px;color:#fff;margin-top:26px;transform:rotate(-1deg);text-shadow:0 2px 8px rgba(0,0,0,.5);}
+
+  .row{display:flex;align-items:center;gap:18px;margin-top:22px;}
+  .pill{background:#2B5BA8;color:#FBF4E2;font-family:'Special Elite',monospace;letter-spacing:.12em;font-size:24px;padding:10px 24px;transform:rotate(-1.4deg);box-shadow:0 4px 0 #1c3f74;}
+  .addr{font-family:'Special Elite',monospace;letter-spacing:.06em;font-size:24px;color:#E8B23A;}
+</style>
+</head>
+<body>
+  <!-- stars -->
+  <span class="star" style="top:40px;left:90px;width:5px;height:5px;box-shadow:0 0 8px #fff;"></span>
+  <span class="star" style="top:70px;left:1040px;width:4px;height:4px;box-shadow:0 0 8px #fff;"></span>
+  <span class="star" style="top:120px;left:300px;width:3px;height:3px;box-shadow:0 0 6px #ffe9b0;background:#ffe9b0;"></span>
+  <span class="star" style="top:30px;left:640px;width:3px;height:3px;box-shadow:0 0 6px #fff;"></span>
+  <span class="star" style="top:150px;left:900px;width:4px;height:4px;box-shadow:0 0 7px #bcd2ff;background:#bcd2ff;"></span>
+  <span class="star" style="top:200px;left:120px;width:3px;height:3px;box-shadow:0 0 6px #fff;"></span>
+  <span class="star" style="top:90px;left:480px;width:3px;height:3px;box-shadow:0 0 6px #fff;"></span>
+
+  <!-- static firework bursts -->
+  <svg class="fw" style="top:60px;left:120px;" width="180" height="180" viewBox="0 0 100 100">
+    <g stroke="#E8B23A" stroke-width="2.4">
+      <line x1="50" y1="14" x2="50" y2="34"/><line x1="50" y1="66" x2="50" y2="86"/><line x1="14" y1="50" x2="34" y2="50"/><line x1="66" y1="50" x2="86" y2="50"/>
+      <line x1="25" y1="25" x2="38" y2="38"/><line x1="62" y1="62" x2="75" y2="75"/><line x1="75" y1="25" x2="62" y2="38"/><line x1="38" y1="62" x2="25" y2="75"/>
+    </g>
+    <g fill="#FF5B5B"><circle cx="50" cy="14" r="3"/><circle cx="86" cy="50" r="3"/><circle cx="50" cy="86" r="3"/><circle cx="14" cy="50" r="3"/></g>
+  </svg>
+  <svg class="fw" style="top:380px;left:980px;" width="200" height="200" viewBox="0 0 100 100">
+    <g stroke="#5B8CFF" stroke-width="2.4">
+      <line x1="50" y1="14" x2="50" y2="34"/><line x1="50" y1="66" x2="50" y2="86"/><line x1="14" y1="50" x2="34" y2="50"/><line x1="66" y1="50" x2="86" y2="50"/>
+      <line x1="25" y1="25" x2="38" y2="38"/><line x1="62" y1="62" x2="75" y2="75"/><line x1="75" y1="25" x2="62" y2="38"/><line x1="38" y1="62" x2="25" y2="75"/>
+    </g>
+    <g fill="#FFD15B"><circle cx="50" cy="14" r="3"/><circle cx="86" cy="50" r="3"/><circle cx="50" cy="86" r="3"/><circle cx="14" cy="50" r="3"/></g>
+  </svg>
+  <svg class="fw" style="top:430px;left:90px;" width="150" height="150" viewBox="0 0 100 100">
+    <g stroke="#FF8FB0" stroke-width="2.4">
+      <line x1="50" y1="18" x2="50" y2="36"/><line x1="50" y1="64" x2="50" y2="82"/><line x1="18" y1="50" x2="36" y2="50"/><line x1="64" y1="50" x2="82" y2="50"/>
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div class="bunting">
+      <div class="flag" style="border-top-color:#D8362F;"></div>
+      <div class="flag" style="border-top-color:#F4ECD6;"></div>
+      <div class="flag" style="border-top-color:#2B5BA8;"></div>
+      <div class="flag" style="border-top-color:#E8B23A;"></div>
+      <div class="flag" style="border-top-color:#D8362F;"></div>
+      <div class="flag" style="border-top-color:#2B5BA8;"></div>
+      <div class="flag" style="border-top-color:#F4ECD6;"></div>
+    </div>
+
+    <div class="pre">We're throwing a</div>
+    <div class="ransom">
+      <span class="r1">P</span>
+      <span class="r2">A</span>
+      <span class="r3">R</span>
+      <span class="r4">T</span>
+      <span class="r5">Y</span>
+      <span class="rbang">!</span>
+    </div>
+    <div class="sub">★ let's celebrate the Fourth of July together ★</div>
+    <div class="row">
+      <div class="pill">SATURDAY · JULY 4TH</div>
+      <div class="addr">30 Peabody St · #2401</div>
+    </div>
+  </div>
+</body>
+</html>

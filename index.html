@@ -37,7 +37,8 @@
   /* ---- twinkling stars ---- */
   .star{position:absolute; border-radius:50%; background:#fff; box-shadow:0 0 6px #fff; z-index:0;}
 
-  .wrap{position:relative; z-index:1; width:100%; max-width:780px; margin:0 auto; padding:42px 16px 80px;}
+  .wrap{position:relative; z-index:1; width:100%; max-width:780px; margin:0 auto; padding:42px 16px 80px; opacity:0; transition:opacity 1s ease;}
+  .wrap.revealed{opacity:1;}
 
   /* ---- bunting ---- */
   .bunting{display:flex; justify-content:center; gap:0; margin:0 auto 22px; max-width:700px; filter:drop-shadow(0 4px 5px rgba(0,0,0,.4));}
@@ -439,7 +440,29 @@ const FW = (function(){
     for(let i=0;i<14;i++) setTimeout(()=>burst(rand(W*0.2,W*0.8), rand(H*0.15,H*0.5)), i*90);
   }
 
-  return { launch, burst, finale, celebrate };
+  function intro(){
+    // ~3 seconds of dense, screen-filling fireworks for the opening
+    for(let i=0;i<74;i++){
+      setTimeout(()=>burst(rand(W*0.05, W*0.95), rand(H*0.06, H*0.82)), i*38);
+    }
+    for(let i=0;i<32;i++){
+      setTimeout(()=>launch(rand(W*0.06, W*0.94)), i*90);
+    }
+  }
+
+  return { launch, burst, finale, celebrate, intro };
+})();
+
+/* ============ INTRO: 3s of fireworks, then reveal the invite ============ */
+(function(){
+  var cv = document.getElementById('fw');
+  var wrap = document.querySelector('.wrap');
+  cv.style.zIndex = '1500';        // fireworks in front of everything during the intro
+  FW.intro();                      // dense screen-filling show
+  setTimeout(function(){
+    cv.style.zIndex = '';          // drop fireworks back behind the invite
+    wrap.classList.add('revealed');// fade the invite in
+  }, 3000);
 })();
 
 /* ============ RSVP MODAL ============ */

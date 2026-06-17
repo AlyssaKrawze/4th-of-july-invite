@@ -274,6 +274,16 @@
         <input type="text" id="rsvp-name" autocomplete="name" required>
       </div>
       <div class="field">
+        <label for="rsvp-guests">Bringing anyone?</label>
+        <select id="rsvp-guests" required>
+          <option value="1">Just me</option>
+          <option value="2">Me + 1</option>
+          <option value="3">Me + 2</option>
+          <option value="4">Me + 3</option>
+          <option value="5">Me + 4 or more</option>
+        </select>
+      </div>
+      <div class="field">
         <label for="rsvp-monument">Favorite US monument?</label>
         <select id="rsvp-monument" required>
           <option value="">— choose one —</option>
@@ -304,6 +314,7 @@
         <div class="mon-k">YOUR FAVORITE MONUMENT</div>
         <div class="mon-v" id="disp-monument"></div>
       </div>
+      <div class="see" id="disp-party"></div>
       <div class="see">See you July 4th! 🇺🇸</div>
       <button type="button" class="btn btn-go" style="width:100%;" onclick="closeRSVP()">Close</button>
     </div>
@@ -538,6 +549,7 @@ document.getElementById('rsvp-form').addEventListener('submit', async function(e
   e.preventDefault();
   const name = document.getElementById('rsvp-name').value.trim();
   const monument = document.getElementById('rsvp-monument').value;
+  const partySize = parseInt(document.getElementById('rsvp-guests').value, 10) || 1;
   if(!name || !monument) return;
 
   const submitBtn = this.querySelector('button[type="submit"]');
@@ -553,7 +565,7 @@ document.getElementById('rsvp-form').addEventListener('submit', async function(e
         'Content-Type': 'application/json',
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify({ name: name, monument: monument })
+      body: JSON.stringify({ name: name, monument: monument, party_size: partySize })
     });
     if(!res.ok) throw new Error('RSVP save failed: ' + res.status);
   } catch(err) {
@@ -563,6 +575,10 @@ document.getElementById('rsvp-form').addEventListener('submit', async function(e
 
   document.getElementById('disp-name').textContent = name;
   document.getElementById('disp-monument').textContent = monument;
+  document.getElementById('disp-party').textContent =
+    partySize === 1 ? "Just you — can't wait! 🎉"
+    : (partySize >= 5 ? "You + your crew — the more the merrier! 🎉"
+    : "You + " + (partySize - 1) + (partySize - 1 === 1 ? " guest" : " guests") + " — love it! 🎉");
   document.getElementById('rsvp-form').style.display = 'none';
   document.getElementById('confirm').classList.add('show');
   FW.celebrate(); // celebratory burst on submit

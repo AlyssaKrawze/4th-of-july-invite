@@ -214,7 +214,7 @@
               <span class="plan-head" style="color:var(--red);">Then upstairs</span>
               <span class="plan-time">show at 9:20 ✦</span>
             </div>
-            <div class="plan-note" style="color:var(--navy-deep); transform:rotate(.5deg); margin-bottom:0;">…swing up to the apartment anytime between 5:30 &amp; 9:20 — then we all head upstairs for the show at 9:20!</div>
+            <div class="plan-note" style="color:var(--navy-deep); transform:rotate(.5deg); margin-bottom:0;">…we'll all drift up to the apartment at some point during the evening — but we'll definitely be upstairs before the 9:20 show!</div>
           </div>
         </div>
 
@@ -360,20 +360,69 @@ const FW = (function(){
     });
   }
 
-  function burst(x, y, c){
+  const TYPES = ['peony','peony','willow','ring','palm','crackle','double'];
+  function pickType(){ return TYPES[(Math.random()*TYPES.length)|0]; }
+
+  function spark(x, y, ang, spd, o){
+    particles.push({
+      x, y, px:x, py:y,
+      vx: Math.cos(ang)*spd, vy: Math.sin(ang)*spd,
+      color: o.color, life: 1,
+      decay: o.decay, size: o.size, fric: o.fric, grav: o.grav, flicker: o.flicker
+    });
+  }
+
+  function burst(x, y, c, type){
     const base = c || color();
-    const multi = Math.random() < 0.45;
-    const count = 65;
-    for(let i=0;i<count;i++){
-      const ang = (Math.PI*2)*(i/count) + rand(-0.05,0.05);
-      const spd = rand(1.4, 5.4);
-      particles.push({
-        x, y, px:x, py:y,
-        vx: Math.cos(ang)*spd,
-        vy: Math.sin(ang)*spd,
-        color: multi ? color() : base,
-        life: 1, decay: rand(0.008, 0.018)
-      });
+    type = type || pickType();
+
+    if(type === 'willow'){
+      // soft, drooping golden fronds that hang and fade slowly
+      const count = 72 + (Math.random()*28|0);
+      for(let i=0;i<count;i++){
+        const ang = (Math.PI*2)*(i/count) + rand(-0.04,0.04);
+        spark(x, y, ang, rand(1.2,3.6), {color: Math.random()<0.7?base:'#FFD700', decay:rand(0.004,0.008), size:rand(1.4,2.4), fric:0.99, grav:0.09});
+      }
+    } else if(type === 'ring'){
+      // a clean expanding ring, slightly tilted for perspective
+      const count = 48;
+      const spd = rand(3.2,4.6);
+      const tilt = rand(0.55,0.95);
+      for(let i=0;i<count;i++){
+        const ang = (Math.PI*2)*(i/count);
+        spark(x, y, ang, spd, {color:base, decay:rand(0.009,0.015), size:2.4, fric:0.986, grav:0.028});
+        particles[particles.length-1].vy *= tilt;
+      }
+    } else if(type === 'palm'){
+      // few thick fronds that arc out and fall — a palm tree shape
+      const count = 14 + (Math.random()*8|0);
+      for(let i=0;i<count;i++){
+        const ang = (Math.PI*2)*(i/count) + rand(-0.06,0.06);
+        spark(x, y, ang, rand(3,6), {color:base, decay:rand(0.006,0.01), size:rand(2.6,4), fric:0.985, grav:0.11});
+      }
+    } else if(type === 'crackle'){
+      // a chaotic shower of glittery sparks that twinkle out fast
+      const count = 95 + (Math.random()*45|0);
+      for(let i=0;i<count;i++){
+        spark(x, y, rand(0,Math.PI*2), rand(0.4,5), {color: Math.random()<0.45?'#FFD700':color(), decay:rand(0.02,0.05), size:rand(1,2), fric:0.965, grav:0.05, flicker:true});
+      }
+    } else if(type === 'double'){
+      // two concentric rings in two colors
+      const c2 = color();
+      const count = 42;
+      for(let i=0;i<count;i++){
+        const ang = (Math.PI*2)*(i/count);
+        spark(x, y, ang, 2.3, {color:base, decay:rand(0.01,0.017), size:2, fric:0.985, grav:0.045});
+        spark(x, y, ang, 4.8, {color:c2,  decay:rand(0.01,0.017), size:2, fric:0.985, grav:0.045});
+      }
+    } else {
+      // peony — the classic full round burst (sometimes multicolor)
+      const multi = Math.random() < 0.4;
+      const count = 62 + (Math.random()*26|0);
+      for(let i=0;i<count;i++){
+        const ang = (Math.PI*2)*(i/count) + rand(-0.05,0.05);
+        spark(x, y, ang, rand(1.4,5.4), {color: multi?color():base, decay:rand(0.008,0.018), size:2, fric:0.985, grav:0.045});
+      }
     }
   }
 
@@ -406,12 +455,15 @@ const FW = (function(){
     for(let i=particles.length-1;i>=0;i--){
       const p = particles[i];
       p.px=p.x; p.py=p.y;
-      p.vx*=0.985; p.vy*=0.985; p.vy+=0.045;
+      const fric = p.fric || 0.985;
+      p.vx*=fric; p.vy*=fric; p.vy += (p.grav != null ? p.grav : 0.045);
       p.x+=p.vx; p.y+=p.vy;
       p.life-=p.decay;
       if(p.life<=0){ particles.splice(i,1); continue; }
-      ctx.globalAlpha = Math.max(p.life,0);
-      ctx.strokeStyle = p.color; ctx.lineWidth = 2; ctx.lineCap='round';
+      let a = Math.max(p.life,0);
+      if(p.flicker) a *= (0.35 + Math.random()*0.65);   // twinkling glitter
+      ctx.globalAlpha = a;
+      ctx.strokeStyle = p.color; ctx.lineWidth = p.size || 2; ctx.lineCap='round';
       ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(p.x,p.y); ctx.stroke();
     }
 

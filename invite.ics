@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//4th of July Invite//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:july4-2026-party@4th-of-july-invite.vercel.app
+DTSTAMP:20260617T120000Z
+DTSTART:20260704T190000Z
+DTEND:20260705T030000Z
+SUMMARY:4th of July Party 🎉
+LOCATION:30 Peabody St\, Unit #2401\, Nashville\, TN
+DESCRIPTION:Pool party 2-6pm\, grill ~5:30\, then up to the rooftop for the 9:20 Nashville fireworks (Let Freedom Sing!). RSVP: https://4th-of-july-invite.vercel.app
+URL:https://4th-of-july-invite.vercel.app
+END:VEVENT
+END:VCALENDAR
